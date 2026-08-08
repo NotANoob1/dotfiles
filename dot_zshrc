@@ -1,6 +1,12 @@
 DISABLE_MAGIC_FUNCTIONS="true"
+
 export HISTCONTROL=ignoreboth
 export HISTORY_IGNORE="(\&|[bf]g|c|clear|history|exit|q|pwd|* --help)"
+export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt appendhistory
 
 export LESS_TERMCAP_md="$(tput bold 2> /dev/null; tput setaf 2 2> /dev/null)"
 export LESS_TERMCAP_me="$(tput sgr0 2> /dev/null)"
