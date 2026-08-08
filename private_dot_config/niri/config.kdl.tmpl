@@ -16,7 +16,7 @@ input {
         numlock
     }
     touchpad {
-        off
+        disabled-on-external-mouse
     }
     mouse {
 
@@ -71,12 +71,19 @@ hotkey-overlay {
     skip-at-startup
 }
 
+{{- if eq .chezmoi.hostname "cachyos" }}
 spawn-sh-at-startup "activate-linux -o -s 0.8 -d --text-color 0.7-0.5-0.9-0.35"
 spawn-sh-at-startup "awww-daemon"
 spawn-sh-at-startup "awww img ~/.config/niri/wallpapers/12259601.jpg"
 spawn-sh-at-startup "waybar"
 spawn-sh-at-startup "mako"
 spawn-sh-at-startup "sleep 10; cava-bg on"
+{{- end }}
+
+
+{{- if eq .chezmoi.hostname "fedora" }}
+spawn-at-startup "cosmic-ext-alternative-startup"
+{{- end }}
 
 window-rule {
     geometry-corner-radius 12
