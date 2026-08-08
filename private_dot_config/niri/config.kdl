@@ -1,0 +1,137 @@
+environment {
+    QT_QPA_PLATFORMTHEME "gtk3"
+    QT_QPA_PLATFORMTHEME_QT6 "gtk3"
+    ELECTRON_OZONE_PLATFORM_HINT "auto"
+    QT_QPA_PLATFORM "wayland"
+    QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
+    XDG_SESSION_TYPE "wayland"
+    XDG_CURRENT_DESKTOP "niri"
+}
+
+input {
+    keyboard {
+        xkb {
+            layout "us"
+        }
+        numlock
+    }
+    touchpad {
+        off
+    }
+    mouse {
+
+    }
+    trackpoint {
+
+    }
+}
+
+prefer-no-csd
+
+screenshot-path "~/Pictures/Screenshots/Screenshot_from_%Y-%m-%d_%H-%M-%S.png"
+
+layout {
+    background-color "transparent"
+    gaps 6
+    center-focused-column "never"
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+    preset-window-heights {
+
+    }
+    default-column-width {
+        proportion 1.0
+    }
+    focus-ring {
+        width 2
+        active-color "#7fc8ff"
+        inactive-color "#505050"
+    }
+    border {
+        off
+        width 4
+        active-color "#ffc87f"
+        inactive-color "#505050"
+        urgent-color "#9b0000"
+    }
+    shadow {
+        off
+        softness 30
+        spread 5
+        offset x=0 y=5
+        color "#0007"
+    }
+    struts {}
+}
+
+hotkey-overlay {
+    skip-at-startup
+}
+
+spawn-sh-at-startup "activate-linux -o -s 0.8 -d --text-color 0.7-0.5-0.9-0.35"
+spawn-sh-at-startup "awww-daemon"
+spawn-sh-at-startup "awww img ~/.config/niri/wallpapers/12259601.jpg"
+spawn-sh-at-startup "waybar"
+spawn-sh-at-startup "mako"
+spawn-sh-at-startup "sleep 10; cava-bg on"
+
+window-rule {
+    geometry-corner-radius 12
+    clip-to-geometry true
+    draw-border-with-background false
+}
+
+window-rule {
+    match app-id="Alacritty"
+    opacity 0.7
+    background-effect {
+        blur true
+        saturation 1.5
+    }
+}
+
+window-rule {
+    match app-id="^zen$" title="^Picture-in-Picture$"
+    open-floating true
+}
+
+window-rule {
+    match app-id="^zen$"
+    background-effect {
+        blur true
+        saturation 1.5
+    }
+}
+
+layer-rule {
+  match namespace="awww-daemon"
+  place-within-backdrop true
+}
+
+blur {
+    passes 2
+    offset 3.0
+    noise 0.02
+}
+
+
+/-window-rule {
+	match app-id=r#"^org\.keepassxc\.KeePassXC$"#
+	match app-id=r#"^org\.gnome\.World\.Secrets$"#
+	block-out-from "screen-capture"
+	block-out-from "screencast"
+}
+
+/-output "eDP-1" {
+	mode "1920x1080@120.030"
+	scale 2
+	transform "normal"
+	position x=1280 y=0
+}
+
+include "binds.kdl"
+include "animations.kdl"
+

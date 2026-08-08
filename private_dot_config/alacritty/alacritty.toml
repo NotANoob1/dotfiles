@@ -1,0 +1,27 @@
+[general]
+live_config_reload = true
+
+[window]
+dynamic_padding = true
+dynamic_title = false
+decorations_theme_variant = "Dark"
+
+[terminal]
+shell="/usr/bin/zsh"
+
+[keyboard]
+bindings = [
+	{ key = "V", mods = "Control", action = "Paste" },
+]
+
+[font.normal]
+family = "MesloLGS Nerd Font"
+style = "Regular"
+
+[font.bold]
+family = "MesloLGS Nerd Font"
+style = "Bold"
+
+[font.italic]
+family = "MesloLGS Nerd Font"
+style = "Italic"
