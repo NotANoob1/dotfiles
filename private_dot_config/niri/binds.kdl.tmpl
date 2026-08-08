@@ -9,7 +9,7 @@ binds {
     {{- if eq .chezmoi.hostname "cachyos" }}
 
     Mod+Space hotkey-overlay-title="Run an Application: rofi" {
-        spawn-sh "rofi -show drun -theme ~/.config/rofi/config.rasi"
+        spawn-sh "rofi -show drun"
     }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" {
         spawn "swaylock"
