@@ -1,35 +1,31 @@
 binds {
-    Mod+Shift+Slash {
-        show-hotkey-overlay
-    }
+
+    // open terminal
     Mod+T hotkey-overlay-title="Open a Terminal: alacritty" {
         spawn "alacritty"
     }
-
-    {{- if eq .chezmoi.hostname "cachyos" }}
-
-    Mod+Space hotkey-overlay-title="Run an Application: rofi" {
-        spawn-sh "rofi -show drun"
-    }
-    Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" {
-        spawn "swaylock"
-    }
-
-    {{- end }}
     
-
-    {{- if eq .chezmoi.hostname "fedora" }}
-
-    Mod+Space hotkey-overlay-title="Run an Application: Cosmic Launcher" {
+    // launcher 
+    Mod+Space hotkey-overlay-title="Run Launcher" {
+        {{- if eq .chezmoi.hostname "cachyos" }}
+        spawn-sh "rofi -show drun"
+        {{- end }}
+        {{- if eq .chezmoi.hostname "fedora" }}
         spawn-sh "cosmic-launcher"
+        {{- end}}
     }
-    Super+Alt+L hotkey-overlay-title="Lock the Screen: Cosmic Greeter" {
-        spawn "cosmic-greeter"
+    
+    // lock screen 
+    Mod+Alt+L hotkey-overlay-title="Lock Screen" {
+        {{- if eq .chezmoi.hostname "cachyos" }}
+        spawn-sh "swaylock"
+        {{- end }}
+        {{- if eq .chezmoi.hostname "fedora" }}
+        spawn-sh "cosmic-launcher"
+        {{- end}}
     }
 
-    {{- end }}
-
-        
+    // volume keys    
     XF86AudioRaiseVolume allow-when-locked=true {
         spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0"
     }
@@ -42,7 +38,8 @@ binds {
     XF86AudioMicMute allow-when-locked=true {
         spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
     }
-
+    
+    // headphones audio control buttons
     XF86AudioPlay allow-when-locked=true {
         spawn-sh "playerctl play-pause"
     }
@@ -56,7 +53,8 @@ binds {
     XF86AudioNext allow-when-locked=true {
         spawn-sh "playerctl next"
     }
-
+    
+    // brightness keys
     XF86MonBrightnessUp allow-when-locked=true {
         spawn "brightnessctl" "--class=backlight" "set" "+10%"
     }
@@ -384,5 +382,8 @@ binds {
     }
     Mod+Shift+P {
         power-off-monitors
+    }
+    Mod+Shift+Slash {
+        show-hotkey-overlay
     }
 }

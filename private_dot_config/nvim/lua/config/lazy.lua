@@ -132,6 +132,33 @@ require("lazy").setup({
 			},
 		},
 		{ "ngynkvn/gotmpl.nvim", opts = {} },
+		{
+			"stevearc/oil.nvim",
+			dependencies = { "nvim-tree/nvim-web-devicons" },
+			lazy = false,
+		},
+		{ "numToStr/Comment.nvim" },
+		{
+			"jiaoshijie/undotree",
+			keys = {
+				{ "<leader>u", "<cmd>lua require('undotree').toggle()<cr>" },
+			},
+		},
+		{
+			"windwp/nvim-autopairs",
+			event = "InsertEnter",
+			config = true,
+		},
+		{
+			"nvimdev/lspsaga.nvim",
+			config = function()
+				require("lspsaga").setup({})
+			end,
+			dependencies = {
+				"nvim-treesitter/nvim-treesitter",
+				"nvim-tree/nvim-web-devicons",
+			},
+		},
 	},
 	install = { colorscheme = { "catppuccin-nvim" } },
 	checker = { enabled = false },
@@ -163,6 +190,12 @@ end)
 require("lualine").setup()
 require("gitsigns").setup()
 require("bufferline").setup()
+require("Comment").setup()
+require("undotree").setup()
+require("nvim-autopairs").setup({ map_cr = true })
+
+require("oil").setup()
+vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
 -- tree sitter
 require("nvim-treesitter").install({
@@ -220,9 +253,7 @@ require("conform").setup({
 	},
 	formatters_by_ft = {
 		lua = { "stylua" },
-		python = { "isort", "black" },
 		rust = { "rustfmt", lsp_format = "fallback" },
-		javascript = { "prettierd", "prettier", stop_after_first = true },
 	},
 })
 
@@ -258,3 +289,4 @@ vim.lsp.config("lua_ls", {
 vim.lsp.enable("lua_ls")
 vim.lsp.enable("rust_analyzer")
 vim.lsp.enable("kdl_lsp")
+vim.lsp.enable("clangd")

@@ -18,12 +18,9 @@ input {
     touchpad {
         disabled-on-external-mouse
     }
-    mouse {
-
-    }
-    trackpoint {
-
-    }
+    mouse {}
+    trackpoint {}
+    warp-mouse-to-focus
 }
 
 prefer-no-csd
@@ -72,13 +69,17 @@ hotkey-overlay {
 }
 
 {{- if eq .chezmoi.hostname "cachyos" }}
-spawn-sh-at-startup "activate-linux -o -s 0.8 -d --text-color 0.7-0.5-0.9-0.35"
+// main
+spawn-sh-at-startup "waybar"
 spawn-sh-at-startup "awww-daemon"
 spawn-sh-at-startup "awww img ~/.config/niri/wallpapers/12259601.jpg"
-spawn-sh-at-startup "waybar"
 spawn-sh-at-startup "dunst"
-spawn-sh-at-startup "sleep 1; cava-bg on"
+// extras
+spawn-sh-at-startup "sleep 5; cava-bg on"
+spawn-sh-at-startup "activate-linux -o -s 0.8 -d --text-color 0.7-0.5-0.9-0.35"
+// idle
 spawn-sh-at-startup "swayidle -w timeout 300 'swaylock -f'"
+// clipboard
 spawn-at-startup "wl-paste --type text --watch cliphist store"
 spawn-sh-at-startup "wl-paste --type image --watch cliphist store"
 {{- end }}
@@ -87,47 +88,6 @@ spawn-sh-at-startup "wl-paste --type image --watch cliphist store"
 {{- if eq .chezmoi.hostname "fedora" }}
 spawn-at-startup "cosmic-ext-alternative-startup"
 {{- end }}
-
-window-rule {
-    geometry-corner-radius 12
-    clip-to-geometry true
-    draw-border-with-background false
-}
-
-window-rule {
-    match app-id="Alacritty"
-    opacity 0.7
-    background-effect {
-        blur true
-        saturation 1.5
-    }
-}
-
-window-rule {
-    match app-id="^zen$" title="^Picture-in-Picture$"
-    open-floating true
-}
-
-window-rule {
-    match app-id="^zen$"
-    background-effect {
-        blur true
-        saturation 1.5
-    }
-}
-
-layer-rule {
-  match namespace="awww-daemon"
-  place-within-backdrop true
-}
-
-layer-rule {
-    match namespace="^rofi$"
-
-    background-effect {
-        blur true
-    }
-}
 
 blur {
     passes 2
@@ -146,4 +106,6 @@ output "HDMI-A-1" {
 
 include "binds.kdl"
 include "animations.kdl"
+include "rules/windows.kdl"
+include "rules/layers.kdl"
 
