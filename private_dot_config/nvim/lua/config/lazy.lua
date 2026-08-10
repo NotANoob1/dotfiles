@@ -36,7 +36,11 @@ require("lazy").setup({
 		},
 		{ "stevearc/conform.nvim" },
 		{ "neovim/nvim-lspconfig" },
-		{ "vim-treesitter/nvim-treesitter" },
+		{
+			"vim-treesitter/nvim-treesitter",
+			lazy = false,
+			build = ":TSUpdate",
+		},
 		{
 			"saghen/blink.cmp",
 			dependencies = {
@@ -127,6 +131,7 @@ require("lazy").setup({
 				},
 			},
 		},
+		{ "ngynkvn/gotmpl.nvim", opts = {} },
 	},
 	install = { colorscheme = { "catppuccin-nvim" } },
 	checker = { enabled = false },
@@ -159,6 +164,21 @@ require("lualine").setup()
 require("gitsigns").setup()
 require("bufferline").setup()
 
+-- tree sitter
+require("nvim-treesitter").install({
+	"json",
+	"jsonc",
+	"toml",
+	"yaml",
+	"markdown",
+	"kdl",
+	"gotmpl",
+	"lua",
+	"rust",
+	"c",
+	"cpp",
+})
+
 -- formating
 require("conform").setup({
 	format_on_save = {
@@ -185,5 +205,23 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 })
 
 -- lsp
+vim.lsp.config("lua_ls", {
+	settings = {
+		Lua = {
+			diagnostics = {
+				globals = { "vim" },
+			},
+			workspace = {
+				library = { vim.env.VIMRUNTIME },
+				checkThirdParty = false,
+			},
+			telemetry = {
+				enable = false,
+			},
+		},
+	},
+})
+
 vim.lsp.enable("lua_ls")
 vim.lsp.enable("rust_analyzer")
+vim.lsp.enable("kdl_lsp")
