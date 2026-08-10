@@ -79,6 +79,8 @@ spawn-sh-at-startup "waybar"
 spawn-sh-at-startup "dunst"
 spawn-sh-at-startup "sleep 1; cava-bg on"
 spawn-sh-at-startup "swayidle -w timeout 300 'swaylock -f'"
+spawn-at-startup "wl-paste --type text --watch cliphist store"
+spawn-sh-at-startup "wl-paste --type image --watch cliphist store"
 {{- end }}
 
 
@@ -119,25 +121,27 @@ layer-rule {
   place-within-backdrop true
 }
 
+layer-rule {
+    match namespace="^rofi$"
+
+    background-effect {
+        blur true
+    }
+}
+
 blur {
     passes 2
     offset 3.0
     noise 0.02
 }
 
-
-/-window-rule {
-	match app-id=r#"^org\.keepassxc\.KeePassXC$"#
-	match app-id=r#"^org\.gnome\.World\.Secrets$"#
-	block-out-from "screen-capture"
-	block-out-from "screencast"
+output "eDP-1" {
+  position x=0 y=0
+  focus-at-startup
 }
 
-/-output "eDP-1" {
-	mode "1920x1080@120.030"
-	scale 2
-	transform "normal"
-	position x=1280 y=0
+output "HDMI-A-1" {
+  position x=2560 y=0
 }
 
 include "binds.kdl"
