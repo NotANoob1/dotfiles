@@ -166,17 +166,50 @@ require("bufferline").setup()
 
 -- tree sitter
 require("nvim-treesitter").install({
+	-- config langs
 	"json",
 	"jsonc",
 	"toml",
 	"yaml",
-	"markdown",
 	"kdl",
+	"rasi",
+
+	-- misc
 	"gotmpl",
+	"markdown",
+	"dockerfile",
+	"vim",
+
+	-- web
+	"html",
+	"css",
+
+	-- docs
+	"vimdoc",
+	"luadoc",
+
+	-- programming langs
 	"lua",
 	"rust",
 	"c",
 	"cpp",
+
+	-- shell langs
+	"bash",
+	"zsh",
+	"fish",
+
+	-- build systems
+	"make",
+	"cmake",
+
+	-- git
+	"diff",
+	"git_config",
+	"git_rebase",
+	"gitattributes",
+	"gitcommit",
+	"gitignore",
 })
 
 -- formating
