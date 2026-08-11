@@ -20,8 +20,6 @@
 		"niri/window"
 	],
 	"modules-center": [
-		"hyprland/language",
-		"custom/left_div#2",
 		"temperature",
 		"custom/left_div#3",
 		"memory",

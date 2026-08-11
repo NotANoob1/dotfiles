@@ -1,0 +1,11 @@
+{
+	"custom/distro": {
+        {{- if eq .chezmoi.hostname "cachyos" }}
+		"format": "",
+        {{- end }}
+        {{- if eq .chezmoi.hostname "artix" }}
+        "format": "",
+        {{- end}}
+		"tooltip": false
+	}
+}

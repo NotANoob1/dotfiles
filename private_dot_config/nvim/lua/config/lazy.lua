@@ -54,7 +54,7 @@ require("lazy").setup({
 				keymap = { preset = "default" },
 				completion = { documentation = { auto_show = false } },
 				sources = { default = { "lsp", "path", "snippets", "buffer" } },
-				fuzzy = { implementation = "rust" },
+				fuzzy = { implementation = "prefer_rust" },
 			},
 		},
 		{ "lewis6991/gitsigns.nvim" },
@@ -201,7 +201,6 @@ vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 require("nvim-treesitter").install({
 	-- config langs
 	"json",
-	"jsonc",
 	"toml",
 	"yaml",
 	"kdl",
