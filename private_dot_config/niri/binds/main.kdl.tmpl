@@ -9,6 +9,9 @@ binds {
         {{- if eq .chezmoi.hostname "cachyos" }}
         spawn-sh "rofi -show drun"
         {{- end }}
+	{{- if eq .chezmoi.hostname "artix" }}
+        spawn-sh "rofi -show drun"
+        {{- end }}
         {{- if eq .chezmoi.hostname "fedora" }}
         spawn-sh "cosmic-launcher"
         {{- end}}
@@ -17,6 +20,9 @@ binds {
     // lock screen 
     Mod+Alt+L hotkey-overlay-title="Lock Screen" {
         {{- if eq .chezmoi.hostname "cachyos" }}
+        spawn-sh "swaylock"
+        {{- end }}
+	{{- if eq .chezmoi.hostname "artix" }}
         spawn-sh "swaylock"
         {{- end }}
         {{- if eq .chezmoi.hostname "fedora" }}

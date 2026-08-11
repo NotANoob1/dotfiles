@@ -84,6 +84,22 @@ spawn-at-startup "wl-paste --type text --watch cliphist store"
 spawn-sh-at-startup "wl-paste --type image --watch cliphist store"
 {{- end }}
 
+{{- if eq .chezmoi.hostname "artix" }}
+// main
+spawn-sh-at-startup "waybar"
+spawn-sh-at-startup "awww-daemon"
+spawn-sh-at-startup "awww img ~/.config/niri/wallpapers/12259601.jpg"
+spawn-sh-at-startup "dunst"
+// extras
+spawn-sh-at-startup "sleep 5; cava-bg on"
+spawn-sh-at-startup "activate-linux -o -s 0.8 -d --text-color 0.7-0.5-0.9-0.35"
+// idle
+spawn-sh-at-startup "swayidle -w timeout 300 'swaylock -f'"
+// clipboard
+spawn-at-startup "wl-paste --type text --watch cliphist store"
+spawn-sh-at-startup "wl-paste --type image --watch cliphist store"
+{{- end }}
+
 
 {{- if eq .chezmoi.hostname "fedora" }}
 spawn-at-startup "cosmic-ext-alternative-startup"
