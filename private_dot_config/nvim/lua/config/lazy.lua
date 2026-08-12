@@ -173,6 +173,8 @@ vim.opt.tabstop = 4
 -- color scheme
 require("catppuccin").setup({
 	flavour = "mocha",
+	term_colors = true,
+	auto_integrations = true,
 })
 vim.cmd.colorscheme("catppuccin-nvim")
 
