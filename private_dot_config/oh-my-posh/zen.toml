@@ -1,100 +1,122 @@
-console_title_template = '{{ .Shell }} in {{ .Folder }}'
+console_title_template = "{{ .Shell }} in {{ .Folder }}"
 version = 3
 final_space = true
 
+[palette]
+rosewater = "#F5E0DC"
+flamingo = "#F2CDCD"
+pink = "#F5C2E7"
+mauve = "#CBA6F7"
+red = "#F38BA8"
+maroon = "#EBA0AC"
+peach = "#FAB387"
+yellow = "#F9E2AF"
+green = "#A6E3A1"
+teal = "#94E2D5"
+sky = "#89DCEB"
+sapphire = "#74C7EC"
+blue = "#89B4FA"
+lavender = "#B4BEFE"
+text = "#CDD6F4"
+subtext1 = "#BAC2DE"
+subtext0 = "#A6ADC8"
+overlay2 = "#9399B2"
+overlay1 = "#7F849C"
+overlay0 = "#6C7086"
+surface2 = "#585B70"
+surface1 = "#45475A"
+surface0 = "#313244"
+base = "#1E1E2E"
+mantle = "#181825"
+crust = "#11111B"
+true = "p:green"
+false = "p:red"
+time = "p:overlay1"
+os-fg = "p:base"
+os-bg = "p:overlay1"
+root-fg = "p:base"
+root-bg = "p:yellow"
+path = "p:yellow"
+git = "p:lavender"
+docker = "p:sky"
+go = "p:mauve"
+haskell = "p:mauve"
+julia = "p:mauve"
+lua = "p:mauve"
+python = "p:mauve"
+rust = "p:mauve"
+
 [secondary_prompt]
-  template = '❯❯ '
-  foreground = 'magenta'
-  background = 'transparent'
+template = "❯❯ "
+foreground = "magenta"
+background = "transparent"
 
 [transient_prompt]
-  template = '❯ '
-  background = 'transparent'
-  foreground_templates = ['{{if gt .Code 0}}red{{end}}', '{{if eq .Code 0}}magenta{{end}}']
+template = "❯ "
+background = "transparent"
+foreground_templates = [
+  "{{if gt .Code 0}}red{{end}}",
+  "{{if eq .Code 0}}magenta{{end}}"
+]
 
 [[blocks]]
-  type = 'prompt'
-  alignment = 'left'
-  newline = true
+type = "prompt"
+alignment = "left"
+newline = true
 
 [[blocks.segments]]
-type = 'text'
-style = 'plain'
-template = '''
-{{- if .Env.DEVSHELL_NAME -}}
-  {{- $parts := split "|" .Env.DEVSHELL_NAME -}}
-  {{- range $part := $parts -}}
-    {{- if $part -}}
-      {{- $sub := split "/" $part -}}
-      {{- if eq (len $sub) 2 -}}
-        <{{ index $sub "_1" }}>{{ index $sub "_0" }}</> <#7f849c>| </>
-      {{- end -}}
-    {{- end -}}
-  {{- end -}}
-{{- end -}}
-'''
+template = "{{ .Path }}"
+foreground = "blue"
+background = "transparent"
+type = "path"
+style = "plain"
 
-	[[blocks.segments]] # Python venv
-  type = 'text'
-  style = 'plain'
-  template = '{{ if .Env.VIRTUAL_ENV }}<yellow>🐍 venv</> <#7f849c>|</> {{ end }}'
+[blocks.segments.properties]
+cache_duration = "none"
+style = "full"
 
-	[[blocks.segments]] # Nix shell indicator
-  type = 'text'
-  style = 'plain'
-  template = '{{ if and .Env.IN_NIX_SHELL (not .Env.DEVSHELL_NAME) }}<blue> nsh</> <#7f849c>|</> {{ end }}'
+[[blocks.segments]]
+template = " {{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}<yellow> *</>{{ end }} <cyan>{{ if gt .Behind 0 }}󰁅{{ end }}{{ if gt .Ahead 0 }}{{ end }}</>"
+foreground = "green"
+background = "transparent"
+type = "git"
+style = "plain"
 
-  [[blocks.segments]]
-    template = '{{ .Path }}'
-    foreground = 'blue'
-    background = 'transparent'
-    type = 'path'
-    style = 'plain'
-
-    [blocks.segments.properties]
-      cache_duration = 'none'
-      style = 'full'
-
-  [[blocks.segments]]
-    template = ' {{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}<yellow> *</>{{ end }} <cyan>{{ if gt .Behind 0 }}󰁅{{ end }}{{ if gt .Ahead 0 }}{{ end }}</>'
-    foreground = 'green'
-    background = 'transparent'
-    type = 'git'
-    style = 'plain'
-
-    [blocks.segments.properties]
-      branch_icon = ''
-      cache_duration = 'none'
-      commit_icon = '@'
-      fetch_status = true
+[blocks.segments.properties]
+branch_icon = ""
+cache_duration = "none"
+commit_icon = "@"
+fetch_status = true
 
 [[blocks]]
-  type = 'rprompt'
-  overflow = 'hidden'
+type = "rprompt"
+overflow = "hidden"
 
-  [[blocks.segments]]
-    template = '{{ .FormattedMs }}'
-    foreground = 'yellow'
-    background = 'transparent'
-    type = 'executiontime'
-    style = 'plain'
+[[blocks.segments]]
+template = "{{ .FormattedMs }}"
+foreground = "yellow"
+background = "transparent"
+type = "executiontime"
+style = "plain"
 
-    [blocks.segments.properties]
-      cache_duration = 'none'
-      threshold = 5000
+[blocks.segments.properties]
+cache_duration = "none"
+threshold = 5000
 
 [[blocks]]
-  type = 'prompt'
-  alignment = 'left'
-  newline = true
+type = "prompt"
+alignment = "left"
+newline = true
 
-  [[blocks.segments]]
-    template = '❯'
-    background = 'transparent'
-    type = 'text'
-    style = 'plain'
-    foreground_templates = ['{{if gt .Code 0}}red{{end}}', '{{if eq .Code 0}}magenta{{end}}']
+[[blocks.segments]]
+template = "❯"
+background = "transparent"
+type = "text"
+style = "plain"
+foreground_templates = [
+  "{{if gt .Code 0}}red{{end}}",
+  "{{if eq .Code 0}}magenta{{end}}"
+]
 
-    [blocks.segments.properties]
-      cache_duration = 'none'
-
+[blocks.segments.properties]
+cache_duration = "none"

@@ -159,6 +159,7 @@ require("lazy").setup({
 				"nvim-tree/nvim-web-devicons",
 			},
 		},
+		{ "mason-org/mason.nvim" },
 	},
 	install = { colorscheme = { "catppuccin-nvim" } },
 	checker = { enabled = false },
@@ -193,6 +194,7 @@ require("bufferline").setup()
 require("Comment").setup()
 require("undotree").setup()
 require("nvim-autopairs").setup({ map_cr = true })
+require("mason").setup()
 
 require("oil").setup()
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
@@ -254,6 +256,7 @@ require("conform").setup({
 		lua = { "stylua" },
 		rust = { "rustfmt", lsp_format = "fallback" },
 		kdl = { "kdlfmt" },
+		toml = { "tombi format", lsp_format = "fallback" },
 	},
 })
 

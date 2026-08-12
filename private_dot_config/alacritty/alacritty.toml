@@ -7,11 +7,11 @@ dynamic_title = false
 decorations_theme_variant = "Dark"
 
 [terminal]
-shell="/usr/bin/zsh"
+shell = "/usr/bin/zsh"
 
 [keyboard]
 bindings = [
-	{ key = "V", mods = "Control", action = "Paste" },
+  { key = "V", mods = "Control", action = "Paste" },
 ]
 
 [font.normal]
