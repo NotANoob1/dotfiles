@@ -13,6 +13,7 @@ window-rule {
 }
 window-rule {
     match app-id="^zen$" title="^Picture-in-Picture$"
+    match app-id="^helium$" title="^Picture-in-Picture$"
     open-floating true
 }
 window-rule {
@@ -21,6 +22,11 @@ window-rule {
         blur true
         saturation 1.5
     }
+}
+window-rule {
+    match app-id="^zen$"
+    match app-id="^helium$"
+    open-maximized true
 }
 window-rule {
     match app-id="^[M|m]inecraft$"

@@ -1,3 +1,8 @@
+include "navigation.kdl"
+include "movement.kdl"
+include "monitors.kdl"
+include "misc.kdl"
+
 binds { 
     // open terminal
     Mod+T hotkey-overlay-title="Open a Terminal: alacritty" {
@@ -6,10 +11,7 @@ binds {
     
     // launcher 
     Mod+Space hotkey-overlay-title="Run Launcher" {
-        {{- if eq .chezmoi.hostname "cachyos" }}
-        spawn-sh "rofi -show drun"
-        {{- end }}
-	{{- if eq .chezmoi.hostname "artix" }}
+        {{- if (or (eq .chezmoi.hostname "cachyos") (eq .chezmoi.hostname "artix")) }}
         spawn-sh "rofi -show drun"
         {{- end }}
         {{- if eq .chezmoi.hostname "fedora" }}
@@ -19,10 +21,7 @@ binds {
     
     // lock screen 
     Mod+Alt+L hotkey-overlay-title="Lock Screen" {
-        {{- if eq .chezmoi.hostname "cachyos" }}
-        spawn-sh "swaylock"
-        {{- end }}
-	{{- if eq .chezmoi.hostname "artix" }}
+        {{- if (or (eq .chezmoi.hostname "cachyos") (eq .chezmoi.hostname "artix")) }}
         spawn-sh "swaylock"
         {{- end }}
         {{- if eq .chezmoi.hostname "fedora" }}
@@ -58,6 +57,9 @@ binds {
     XF86AudioNext allow-when-locked=true {
         spawn-sh "playerctl next"
     }
+    Mod+I {
+        spawn-sh "playerctl play-pause"
+    }
     
     // brightness keys
     XF86MonBrightnessUp allow-when-locked=true {
@@ -85,6 +87,28 @@ binds {
     }
     Mod+Alt+P {
         screenshot-window
+    }
+    
+    // size
+    Mod+R {
+        switch-preset-column-width
+    }
+    Mod+Shift+R {
+        switch-preset-column-width-back
+    }
+    Mod+Ctrl+Shift+R {
+        switch-preset-window-height
+    }
+    Mod+Ctrl+R {
+        reset-window-height
+    }
+
+    // fullscreen
+    Mod+F {
+        maximize-column
+    }
+    Mod+Shift+F {
+        fullscreen-window
     }
     
     // misc

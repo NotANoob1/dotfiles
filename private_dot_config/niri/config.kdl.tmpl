@@ -1,3 +1,33 @@
+// imports
+
+include "animations.kdl"
+include "rules/main.kdl"
+include "binds/main.kdl"
+
+// startup apps
+
+{{- if (or (eq .chezmoi.hostname "cachyos") (eq .chezmoi.hostname "artix")) }}
+// main
+spawn-sh-at-startup "waybar"
+spawn-sh-at-startup "awww-daemon"
+spawn-sh-at-startup "awww img ~/.config/niri/wallpapers/12259601.jpg"
+spawn-sh-at-startup "dunst"
+// idle
+spawn-sh-at-startup "swayidle -w timeout 300 'swaylock -f'"
+// clipboard
+spawn-at-startup "wl-paste --type text --watch cliphist store"
+spawn-sh-at-startup "wl-paste --type image --watch cliphist store"
+// extras
+spawn-sh-at-startup "sleep 5; cava-bg on"
+spawn-sh-at-startup "activate-linux -o -s 0.8 -d --text-color 0.7-0.5-0.9-0.35"
+{{- end }}
+
+{{- if eq .chezmoi.hostname "fedora" }}
+spawn-at-startup "cosmic-ext-alternative-startup"
+{{- end }}
+
+
+// env
 environment {
     QT_QPA_PLATFORMTHEME "gtk3"
     QT_QPA_PLATFORMTHEME_QT6 "gtk3"
@@ -7,6 +37,8 @@ environment {
     XDG_SESSION_TYPE "wayland"
     XDG_CURRENT_DESKTOP "niri"
 }
+
+// input
 
 input {
     keyboard {
@@ -21,11 +53,10 @@ input {
     mouse {}
     trackpoint {}
     warp-mouse-to-focus
+    focus-follows-mouse max-scroll-amount="0%"
 }
 
-prefer-no-csd
-
-screenshot-path "~/Pictures/Screenshots/Screenshot_from_%Y-%m-%d_%H-%M-%S.png"
+// layout
 
 layout {
     background-color "transparent"
@@ -40,7 +71,7 @@ layout {
 
     }
     default-column-width {
-        proportion 1.0
+        proportion 0.5
     }
     focus-ring {
         width 2
@@ -64,52 +95,7 @@ layout {
     struts {}
 }
 
-hotkey-overlay {
-    skip-at-startup
-}
-
-{{- if eq .chezmoi.hostname "cachyos" }}
-// main
-spawn-sh-at-startup "waybar"
-spawn-sh-at-startup "awww-daemon"
-spawn-sh-at-startup "awww img ~/.config/niri/wallpapers/12259601.jpg"
-spawn-sh-at-startup "dunst"
-// extras
-spawn-sh-at-startup "sleep 5; cava-bg on"
-spawn-sh-at-startup "activate-linux -o -s 0.8 -d --text-color 0.7-0.5-0.9-0.35"
-// idle
-spawn-sh-at-startup "swayidle -w timeout 300 'swaylock -f'"
-// clipboard
-spawn-at-startup "wl-paste --type text --watch cliphist store"
-spawn-sh-at-startup "wl-paste --type image --watch cliphist store"
-{{- end }}
-
-{{- if eq .chezmoi.hostname "artix" }}
-// main
-spawn-sh-at-startup "waybar"
-spawn-sh-at-startup "awww-daemon"
-spawn-sh-at-startup "awww img ~/.config/niri/wallpapers/12259601.jpg"
-spawn-sh-at-startup "dunst"
-// extras
-spawn-sh-at-startup "sleep 5; cava-bg on"
-spawn-sh-at-startup "activate-linux -o -s 0.8 -d --text-color 0.7-0.5-0.9-0.35"
-// idle
-spawn-sh-at-startup "swayidle -w timeout 300 'swaylock -f'"
-// clipboard
-spawn-at-startup "wl-paste --type text --watch cliphist store"
-spawn-sh-at-startup "wl-paste --type image --watch cliphist store"
-{{- end }}
-
-
-{{- if eq .chezmoi.hostname "fedora" }}
-spawn-at-startup "cosmic-ext-alternative-startup"
-{{- end }}
-
-blur {
-    passes 2
-    offset 3.0
-    noise 0.02
-}
+// outputs
 
 output "eDP-1" {
   position x=0 y=0
@@ -120,12 +106,20 @@ output "HDMI-A-1" {
   position x=2560 y=0
 }
 
-include "binds.kdl"
-include "animations.kdl"
-include "rules/windows.kdl"
-include "rules/layers.kdl"
-include "binds/main.kdl"
-include "binds/navigation.kdl"
-include "binds/movement.kdl"
-include "binds/monitors.kdl"
+// misc
+
+prefer-no-csd
+
+screenshot-path "~/Pictures/Screenshots/Screenshot_from_%Y-%m-%d_%H-%M-%S.png"
+
+hotkey-overlay {
+    skip-at-startup
+}
+
+blur {
+    passes 2
+    offset 3.0
+    noise 0.02
+}
+
 

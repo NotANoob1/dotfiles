@@ -34,5 +34,3 @@ _fzf_compgen_dir() {
 
 alias ls="eza -la --git --git-ignore --icons=always --color-scale-mode=gradient -b --no-user --no-time --group-directories-first"
 
-fastfetch
-
