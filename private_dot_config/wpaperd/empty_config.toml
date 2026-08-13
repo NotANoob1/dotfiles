@@ -1,0 +1,7 @@
+[default]
+duration = "1m"
+mode = "fit"
+sorting = "random"
+
+[any]
+path = "~/.config/niri/wallpapers/"

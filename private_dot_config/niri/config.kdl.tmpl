@@ -9,7 +9,7 @@ include "binds/main.kdl"
 {{- if (or (eq .chezmoi.hostname "cachyos") (eq .chezmoi.hostname "artix")) }}
 // main
 spawn-sh-at-startup "waybar"
-spawn-sh-at-startup "awww-daemon && sh ~/.config/niri/scripts/awww_randomize.sh ~/.config/niri/wallpapers/ 60"
+spawn-sh-at-startup "wpaperd -d"
 spawn-sh-at-startup "dunst"
 // idle
 spawn-sh-at-startup "swayidle -w timeout 120 'swaylock -f'"
