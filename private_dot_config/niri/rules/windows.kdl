@@ -29,6 +29,10 @@ window-rule {
     open-maximized true
 }
 window-rule {
-    match app-id="^[M|m]inecraft$"
+    match title="^Minecraft.*"
     open-fullscreen true
+}
+window-rule {
+    match app-id="org.prismlauncher.PrismLauncher"
+    open-maximized true
 }
