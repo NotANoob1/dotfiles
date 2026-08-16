@@ -198,6 +198,10 @@ require("undotree").setup()
 require("nvim-autopairs").setup({ map_cr = true })
 require("mason").setup()
 
+vim.filetype.add({
+	pattern = { ["dot_zshrc"] = "zsh" },
+})
+
 require("oil").setup()
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 

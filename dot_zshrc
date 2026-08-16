@@ -8,9 +8,6 @@ HISTSIZE=10000
 SAVEHIST=10000
 setopt appendhistory
 
-export LESS_TERMCAP_md="$(tput bold 2> /dev/null; tput setaf 2 2> /dev/null)"
-export LESS_TERMCAP_me="$(tput sgr0 2> /dev/null)"
-
 export EDITOR=nvim
 bindkey -e
 export PATH=$PATH:/home/notanoob/.local/bin
@@ -32,5 +29,7 @@ _fzf_compgen_dir() {
   fd --type d --hidden --follow --exclude ".git" . "$1"
 }
 
-alias ls="eza -la --git --git-ignore --icons=always --color-scale-mode=gradient -b --no-user --no-time --group-directories-first"
+alias ls="eza -la --git --icons=always --color-scale-mode=gradient -b --no-user --no-time --group-directories-first"
+
+alias grep="rg"
 
